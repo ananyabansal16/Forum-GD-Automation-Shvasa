@@ -5,7 +5,7 @@ import requests
 import random
 import logging
 import json
-from constants import STATUS_2, STATUS_3, AUTHOR_IDS, POST_QUESTION_URL, N
+from constants import STATUS_2, STATUS_3, AUTHOR_IDS, POST_QUESTION_URL, N, GOOGLE_SHEET
 
 # Set up logging
 logging.basicConfig(
@@ -19,7 +19,7 @@ credentials_json_path = os.getenv('GOOGLE_SHEETS_CREDENTIALS_JSON')
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 credentials = ServiceAccountCredentials.from_json_keyfile_name(credentials_json_path, scope)
 client = gspread.authorize(credentials)
-sheet = client.open('questions').sheet1
+sheet = client.open(GOOGLE_SHEET).sheet1
 
 def ensure_columns_exist():
     columns = sheet.row_values(1)

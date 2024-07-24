@@ -19,5 +19,8 @@ REPLY_QUESTION_URL = 'https://services.shvasa.com/api/forum/question/{question_i
 # Number of questions to post at a time
 N = 1
 
+# Google Sheet
+GOOGLE_SHEET = 'questions'
+
 # API Token
 # API_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWY4Y2FiN2UyY2ZmNDE1MmQ4YjZkMTciLCJlbWFpbCI6ImFkbWluQHNodmFzYS5jb20iLCJyb2xlIjpbMjA0NV0sImlhdCI6MTcyMTY0MTU0MH0.BCU1unCegTsH-h8p9nnJoN8WIxzsCJT_g4kZYnr7ldo'
