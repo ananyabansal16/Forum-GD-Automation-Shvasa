@@ -1,0 +1,4 @@
+.env
+credentials.json
+answer_questions.log
+post_questions.log
