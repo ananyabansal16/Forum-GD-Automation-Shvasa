@@ -1,2 +1,3 @@
-pip install pipreqs
-pipreqs .
+gspread==6.1.2
+oauth2client==4.1.3
+Requests==2.32.3
