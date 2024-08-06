@@ -6,6 +6,7 @@ import random
 import logging
 import json
 from constants import STATUS_2, STATUS_3, AUTHOR_IDS, POST_QUESTION_URL, N, GOOGLE_SHEET
+from dotenv import load_dotenv
 
 # Set up logging
 logging.basicConfig(
@@ -15,6 +16,8 @@ logging.basicConfig(
 )
 
 # Google Sheets setup
+# Load environment variables from the .env file
+load_dotenv()
 credentials_json_path = os.getenv('GOOGLE_SHEETS_CREDENTIALS_JSON')
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 credentials = ServiceAccountCredentials.from_json_keyfile_name(credentials_json_path, scope)
