@@ -70,6 +70,8 @@ def answer_question(question_id, answer_text, replier_id):
         return True
     else:
         logging.error(f"Failed to answer question ID {question_id}: {response.text}")
+        logging.error(f"Request headers: {headers}")
+        logging.error(f"Request data: {data}")
         return False
 
 def answer_all_posted_questions():
@@ -81,6 +83,9 @@ def answer_all_posted_questions():
             answer_text = question['Answer']
             replier_id = random.choice(REPLIER_IDS)
             logging.debug(f"Answering question ID {question_id} by user {replier_id}")
+            if not answer_text:
+                logging.error(f"Missing answer text for question ID {question_id}")
+                continue
             if answer_question(question_id, answer_text, replier_id):
                 update_question_status(row, STATUS_4)
                 logging.info(f"Answered question ID {question_id} by user {replier_id}")
