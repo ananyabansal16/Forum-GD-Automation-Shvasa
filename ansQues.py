@@ -39,13 +39,18 @@ def ensure_columns_exist():
 
 def get_all_posted_questions(status):
     records = sheet.get_all_records()
-    posted_questions = [record for record in records if record.get('Status') == status]
+    # posted_questions = [record for record in records if record.get('Status') == status]
+    posted_questions = {idx + 2: record for idx, record in enumerate(records) if record.get('Status') == status}
     logging.debug(f"Found {len(posted_questions)} posted questions")
     return posted_questions
 
 def update_question_status(row, status):
-    status_col = sheet.find('Status').col
-    sheet.update_cell(row, status_col, status)
+    try:
+        status_col = sheet.find('Status').col
+        sheet.update_cell(row, status_col, status)
+        logging.info(f"Updated question status at row {row} to {status}")
+    except Exception as e:
+        logging.error(f"Failed to update question status at row {row}: {e}")
 
 def answer_question(question_id, answer_text, replier_id):
     url = REPLY_QUESTION_URL.format(question_id=question_id)
@@ -69,9 +74,9 @@ def answer_question(question_id, answer_text, replier_id):
 
 def answer_all_posted_questions():
     questions = get_all_posted_questions(STATUS_3)
-    for question in questions:
+    for row, question in questions.items():
         if question:
-            row = questions.index(question) + 2
+            # row = questions.index(question) + 2
             question_id = question['Question ID']
             answer_text = question['Answer']
             replier_id = random.choice(REPLIER_IDS)
